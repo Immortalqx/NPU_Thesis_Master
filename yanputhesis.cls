@@ -448,7 +448,7 @@
 %%-----------------------------------------------------------------------------%
 \if@npu@lang@chs                                            % 定制中文特殊页面
     \newcommand{\nwpu@page@ack}{致{\quad}谢}                %
-    \newcommand{\nwpu@page@acp}{在学期间发表的学术成果和参加%
+    \newcommand{\nwpu@page@acp}{在学期间取得的学术成果和参加%
         科研情况}                                           %
 \else                                                       % 定制英文特殊页面
     \newcommand{\nwpu@page@ack}{Acknowledgements}           %
@@ -885,7 +885,7 @@
         \begin{center}
             \renewcommand{\baselinestretch}{1.5}\fSong\sSihao\par
             {\bf 西北工业大学}\par
-            {\bf 学位论文知识产权声明书}\par
+            {\bf 学位论文使用授权声明}\par
         \end{center}
         \renewcommand{\baselinestretch}{2.22}\fSong\fontsize{10.6pt}{10.6pt}\selectfont
         {\qquad}本人完全了解学校有关保护知识产权的规定，即：研究生在校攻读学位期间论文工作的
@@ -921,7 +921,7 @@
             \mbox{人在导师的指导下进行研究工作所取得的成果。尽我所知，除文中已经注明引用的内容}
             \mbox{和致谢的地方外，本论文不包含任何其他个人或集体已经公开发表或撰写过的研究成果，}
             \mbox{不包含本人或其他已申请学位或其他用途使用过的成果。对本文的研究做出重要贡献的}
-            \mbox{个人和集体，均已在文中以明确方式表明。}\par
+            \mbox{个人和集体，均已在文中以明确方式标明。}\par
             {\qquad}本人学位论文与资料若有不实，愿意承担一切相关的法律责任。\par
             \vspace*{1.5mm}
             \hspace*{21em}\hfill 学位论文作者签名{~:~}\underline{\qquad\qquad\quad}\par
