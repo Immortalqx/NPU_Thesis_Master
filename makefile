@@ -1,74 +1,56 @@
-TEX      = xelatex
-BIB      = bibtex
-MKI      = makeindex
-MAIN     = yanputhesis
-TEXARGS  = -synctex=1 -shell-escape
+# =============================
+# 默认目标：编译 main.tex（带参考文献）
+# =============================
+.DEFAULT_GOAL := mainbib
 
-main: close wipe clean makecls open
+TEX     = xelatex
+BIB     = bibtex
+MKI     = makeindex
+TEXARGS = -synctex=1 -shell-escape
 
-sample: close wipesample clean texsample opensample
-
-samplebib: close wipesample clean texsamplebib opensample
-
-makecls: $(MAIN).dtx
-	$(TEX) $<
-	./zhmakeindex -s gglo.ist -o $(MAIN).gls $(MAIN).glo
-	$(MKI) -s gind.ist -o $(MAIN).ind $(MAIN).idx
-	$(TEX) $<
-	$(TEX) $<
-
+# 平台检测（只用来选清理命令）
 ifeq ($(OS), Windows_NT)
-    PLATFORM = Windows
-else
-    ifeq ($(shell uname), Darwin)
-        PLATFORM = MacOS
-    else
-        PLATFORM = Unix-Like
-    endif
-endif
-
-ifeq ($(PLATFORM), Windows)
     RM = del /s /f
-    OPEN = cmd /c start
-    CLOSE = cmd /c taskkill /im Acrobat.exe /t /f
 else
     RM = rm -rf
-    OPEN = open
-    PID = $$(ps -ef | grep AdobeAcrobat | grep -v grep | awk '{print $$2}')
-    CLOSE = kill -9 $(PID)
 endif
 
-texsample: $(MAIN)-sample.tex
+# =============================
+# 主要目标
+# =============================
+
+# 快速编译：只跑 XeLaTeX，不更新参考文献
+main: texmain
+
+# 完整编译：XeLaTeX + BibTeX + XeLaTeX×2
+mainbib: texmainbib
+
+# =============================
+# 编译规则
+# =============================
+
+# 只跑 LaTeX（一般用于快速检查不涉及引用）
+texmain: main.tex
 	$(TEX) $(TEXARGS) $<
-	$(MKI) $(MAIN)-sample.nlo -s nomencl.ist -o $(MAIN)-sample.nls
+	-$(MKI) main.nlo -s nomencl.ist -o main.nls
 	$(TEX) $(TEXARGS) $<
 
-texsamplebib: $(MAIN)-sample.tex
+# LaTeX + BibTeX + LaTeX x2（完整流程）
+texmainbib: main.tex
 	$(TEX) $(TEXARGS) $<
-	$(BIB) $(MAIN)-sample.aux
-	$(MKI) $(MAIN)-sample.nlo -s nomencl.ist -o $(MAIN)-sample.nls
+	$(BIB) main.aux
+	-$(MKI) main.nlo -s nomencl.ist -o main.nls
 	$(TEX) $(TEXARGS) $<
 	$(TEX) $(TEXARGS) $<
 
-open: $(MAIN).pdf
-	$(OPEN) $(MAIN).pdf
-
-opensample: $(MAIN)-sample.pdf
-	$(OPEN) $(MAIN)-sample.pdf
-
-close:
-	@$(CLOSE) || echo not found
+# =============================
+# 清理
+# =============================
 
 clean:
-	$(RM) *.gls *.glo *.ind yanputhesis.idx
-	$(RM) *.ilg *.aux *.toc *.aux
+	$(RM) *.gls *.glo *.ind main.idx
+	$(RM) *.ilg *.aux *.toc
 	$(RM) *.hd *.out *.thm *.gz *.nlo *.nls
 	$(RM) *.log *.lof *.lot *.bbl *.blg
 
-wipe:
-	$(RM) $(MAIN).pdf
-
-wipesample:
-	$(RM) $(MAIN)-sample.pdf
-
-.PHONY: open close clean wipe
+.PHONY: main mainbib texmain texmainbib clean

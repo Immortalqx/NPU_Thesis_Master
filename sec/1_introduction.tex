@@ -1,0 +1,148 @@
+\chapter{绪论}
+\chaptermark{绪论}
+\section{这是中标题}
+emmmm
+\subsection{这是小标题}
+emmmmm
+\subsubsection{这是小小标题}
+搞这么多层大丈夫?
+
+\section{公式}
+简单行内公式 $a+b=233$，超高公式会被压缩 $\frac{1}{2}=0.5$ 或者使用
+\lstinline`\displaystyle` 防止被压缩：$\displaystyle \frac{1}{2}=0.5$。
+
+简单的不标号单行公式
+$$a_0+a_1+a_2=\sqrt{233}$$
+需要标号和起名的公式如\autoref{eq:eqtest} 所示。测试下 autoref \autoref{eq:eqtest}
+\begin{equation}
+    \label{eq:eqtest}
+    a_0 + a_1 + a_2 = \sqrt{233}
+\end{equation}
+
+\section{术语}
+
+在使用术语和缩略的时候可以使用\lstinline`\gls`命令：例如：术语\gls{massEnergyFunc}及缩略\gls{npu}。
+
+\section{特殊符号}
+
+用\href{http://detexify.kirelabs.org/classify.html}{
+    http://detexify.kirelabs.org/classify.html}画出来。
+
+\section{参考文献的引用}
+
+\LaTeX{} 中要求参考文献使用 \lstinline`\cite` 进行参考引用，若论文要求中说明需在
+文字的右上角注明引用，请使用命令 \lstinline`\cite` 进行参考引用。举个不恰当的例
+子，比如本论文模板的原版“LaTeX-Template-For-NPU-Thesis”\cite{NWPUThesisLaTeXTemplate}
+要求务必声明引用，同时预配置了插件“math-symbols”\cite{MathSymbolsinLaTeXbypolossk}。
+对组件的引用是每一名科学工作者的基本素养（一本正经）。对于需要引用但是并不需要明
+确指明引用位置的文献，请使用 \lstinline`\nocite` 命令。
+
+在此同时感谢真正的 dalao 高德纳开发了全世界版本号最接近 $\pi$ 的软件
+\LaTeX \cite{knuth1986the}\nocite{lamport1989latex}。
+
+测试引用文献 \cite{szegedy2015going, shen2021peridynamic, chen2014maiyuan, chen2018autonomous}。
+其中倒数第二篇为中文文献，最后一篇为会议文献。
+
+\section{标点符号的选择}
+
+根据《中华人民共和国国家标准 GB/T 15834-1995》及《出版工作中的语言文字规范》中提
+及，“科学技术中文图书，如果涉及公式、算式较多，句号可以统一用英文句号‘．’，省略
+号用英文三个点的省略号‘…’”。如果您是中文的科技论文写作者，建议您使用全角英文句
+号“\lstinline`．`”间隔句子。如果是人文学科则可以不做处理。您也可以在一开始先使用
+中文句号‘。’，最后批量替换即可。
+
+\section{萌新如何编译}
+
+\begin{enumerate}
+    \setlength{\itemsep}{0pt}
+    \item 安装正确版本的 TexLive 2021
+    \item 使用自带的 TeXworks 打开 \lstinline`yanputhesis-sample.tex`
+    \item 左上角下拉框选择工具
+    \item 依次使用 \lstinline`XeLaTeX-BibTeX-XeLaTeX-XeLaTeX` 编译
+\end{enumerate}
+
+\section{如何生成盲评版本}
+
+\begin{enumerate}
+    \setlength{\itemsep}{0pt}
+    \item 在这份样例当中，已经将标题页可能用到的作者姓名、导师姓名添加了空白盲评
+          标记 \lstinline`\blindreview{text}`。如果需要生成盲评版本，则需要将文档类型
+          设置为 \lstinline`blindreview=true`，这样便可得到标题页不含作者与导师姓名的
+          版本。
+    \item 在致谢中，除了导师名字之外，其他老师、同学的名字也应当隐去。同样可以将
+          姓名添加空白盲评标记 \lstinline`\blindreview{text}` 来得到留空版本的结果。
+    \item 一般正文中不建议出现留空，因此推荐另外两种盲评标记，涂黑或者打星。使用
+          \lstinline`\blackbox{text}` 命令将姓名添加涂黑盲评标记，文本会替换为与文字相
+          同长度的黑色方块，制造涂黑效果。或者使用 \lstinline`\markname{text}` 命令将
+          姓名添加打星盲评标记，姓名将替换成 3 个星号“***”。
+    \item 下面给出示例（通过开启盲评选项查看效果）：
+          \begin{enumerate}
+              \setlength{\itemsep}{0pt}
+              \item 不添加任何盲评标记：“感谢某某某教授的悉心指导。”
+              \item 使用了空白盲评标记：“感谢\blindreview{某某某}教授的悉心指导。”
+              \item 使用了涂黑盲评标记：“感谢\blackbox{某某某}教授的悉心指导。”
+              \item 使用了打星盲评标记：“感谢\markname{某某某}教授的悉心指导。”
+          \end{enumerate}
+\end{enumerate}
+
+\section{如何生成学位论文评阅人和答辩委员会名单}
+
+\begin{enumerate}
+    \setlength{\itemsep}{0pt}
+    \item 在这份样例当中，已经预设置了盲评学位论文评阅人和答辩委员会名单，实现代码可
+          参考\autoref{code:makeBlindReviewerCommitteePage} 所示，明审版本可参考
+          \autoref{code:makeOpenReviewerCommitteePage} 所示。
+    \item 在学位论文评阅人名单中分为两种情况，即盲评与明审。请根据自身情况填写评
+          委信息。如果是盲评，使用命令 \lstinline`\fullBlindReview{num}` 来生成
+          盲评表格，其中参数 \lstinline`num` 表示盲评专家人数，一般是 3 或 5 人。
+          如果是明审，使用命令 \lstinline`\expert{name}{title}{university}`
+          登记评委信息，其中参数 \lstinline`name`、\lstinline`title`、
+          \lstinline`university` 分别为专家的姓名、职称、学校。
+    \item 答辩委员会需登记四个信息：答辩时间、答辩主席、答辩评委以及答辩秘书。其
+          中，答辩时间为 \lstinline`\committee` 命令后的第一个参数，其余分别使用
+          \lstinline`\defenseChair`、\lstinline`\committeeMember`、
+          \lstinline`\defenseSecretary` 命令登记专家个人信息，用法与
+          \lstinline`\expert` 命令一致。
+\end{enumerate}
+
+\begin{lstlisting}[language={TeX}, label={code:makeBlindReviewerCommitteePage},
+    caption={盲评样例 makeBlindReviewerCommitteePage.tex}]
+\makeCommitteePage{
+    \reviewers{\fullBlindReview{5}}
+    \committee{2023 年 x 月 y 日}{
+        \defenseChair{赵钱孙}{教授}{西北工业大学}
+        \committeeMember{周吴郑}{教授}{西北工业大学}
+        \committeeMember{冯陈褚}{教授}{西北工业大学}
+        \committeeMember{蒋沈韩}{教授}{西北工业大学}
+        \committeeMember{朱秦尤}{教授}{西北工业大学}
+        \committeeMember{何吕施}{教授}{西北工业大学}
+        \committeeMember{孔曹严}{教授}{西北工业大学}
+        \defenseSecretary{金魏陶}{教授}{西北工业大学}
+    }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language={TeX}, label={code:makeOpenReviewerCommitteePage},
+    caption={明审样例 makeOpenReviewerCommitteePage.tex}]
+\makeCommitteePage{
+    \reviewers{
+        \expert{周吴郑}{教授}{西北工业大学}
+        \expert{冯陈褚}{教授}{西北工业大学}
+        \expert{蒋沈韩}{教授}{西北工业大学}
+        \expert{朱秦尤}{教授}{西北工业大学}
+        \expert{何吕施}{教授}{西北工业大学}
+    }
+    \committee{2023 年 x 月 y 日}{
+        \defenseChair{赵钱孙}{教授}{西北工业大学}
+        \committeeMember{周吴郑}{教授}{西北工业大学}
+        \committeeMember{冯陈褚}{教授}{西北工业大学}
+        \committeeMember{蒋沈韩}{教授}{西北工业大学}
+        \committeeMember{朱秦尤}{教授}{西北工业大学}
+        \committeeMember{何吕施}{教授}{西北工业大学}
+        \committeeMember{孔曹严}{教授}{西北工业大学}
+        \defenseSecretary{金魏陶}{教授}{西北工业大学}
+    }
+}
+\end{lstlisting}
+
+\cleardoublepage

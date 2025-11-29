@@ -24,7 +24,7 @@
 \newif\if@npu@type@phd                                      % 博士版本标记
 \newif\if@npu@type@mst                                      % 硕士版本标记
 \newif\if@npu@type@bcl                                      % 本科版本标记
-\newif\if@npu@academic										% 学术学位标记
+\newif\if@npu@academic % 学术学位标记
 \newif\if@npu@output@blindreview                            % 盲评版本标记
 \newif\if@npu@font@adobe                                    % Adobe 字体标记
 \newif\if@npu@font@winfonts                                 % 强制使用 Win 字体
@@ -109,7 +109,7 @@
 \newcommand\defaultHei{SimHei}                              % 黑体，用于标题
 \newcommand\defaultKai{KaiTi}                               % 楷体，一般用于强调
 \newcommand\defaultFag{FangSong}                            % 仿宋，一般用于强调
-\if@npu@font@winfonts\relax                                 % 检测 de 选项
+\if@npu@font@winfonts\relax                                 % 检测 winfonts 选项
 \else                                                       %
     \if@npu@font@adobe                                      % 检测 Adobe 选项
         \renewcommand\defaultSog{Adobe Song Std}            % 宋体，用于正文
@@ -435,20 +435,19 @@
     \newcommand{\nwpu@chs@doctitle}{{\nwpu@chs@degree}学位论文}
     \newcommand{\nwpu@chs@header}{\nwpu@chs@schoolname\nwpu@chs@doctitle}
 \fi                                                         %
-\if@npu@academic											% 控制内封模板的首项名称
-	\newcommand{\nwpu@chs@innerCoverFirstOption}{学科专业}	 % 学术学位应该是学科专业
-	\newcommand{\nwpu@chs@outerCoverFirstOption}{学{\enspace}科{\enspace}专{\enspace}业}
+\if@npu@academic % 控制内封模板的首项名称
+\newcommand{\nwpu@chs@innerCoverFirstOption}{学科专业}  % 学术学位应该是学科专业
+\newcommand{\nwpu@chs@outerCoverFirstOption}{学{\enspace}科{\enspace}专{\enspace}业}
 \else
-	\newcommand{\nwpu@chs@innerCoverFirstOption}{专业领域}	 % 专业学位应该是专业领域
-	\newcommand{\nwpu@chs@outerCoverFirstOption}{专{\enspace}业{\enspace}领{\enspace}域}
+\newcommand{\nwpu@chs@innerCoverFirstOption}{专业领域}  % 专业学位应该是专业领域
+\newcommand{\nwpu@chs@outerCoverFirstOption}{专{\enspace}业{\enspace}领{\enspace}域}
 \fi
 \newcommand{\nwpu@eng@doctitle}{\nwpu@eng@degree Thesis}    % 英文文档名和页眉
 \newcommand{\nwpu@eng@header}{\nwpu@eng@doctitle of \nwpu@eng@schoolname}
-
 %%-----------------------------------------------------------------------------%
 \if@npu@lang@chs                                            % 定制中文特殊页面
     \newcommand{\nwpu@page@ack}{致{\quad}谢}                %
-    \newcommand{\nwpu@page@acp}{在学期间取得的学术成果和参加%
+    \newcommand{\nwpu@page@acp}{在学期间发表的学术成果和参加%
         科研情况}                                           %
 \else                                                       % 定制英文特殊页面
     \newcommand{\nwpu@page@ack}{Acknowledgements}           %
@@ -516,13 +515,13 @@
     \renewcommand{\nwpu@eng@advisor}{#2}                    %
 }                                                           %
 \newcommand{\advisorAcademicRank}[2]{                       % 导师学术等级
-	\renewcommand{\nwpu@chs@advisorAcademicRank}{#1}        %
-	\renewcommand{\nwpu@eng@advisorAcademicRank}{#2}        %
-}  
+\renewcommand{\nwpu@chs@advisorAcademicRank}{#1}        %
+\renewcommand{\nwpu@eng@advisorAcademicRank}{#2}        %
+}
 \newcommand{\funding}[2]{                                   % 设置基金资助
     \renewcommand{\nwpu@chs@funding}{#1}                    %
     \renewcommand{\nwpu@eng@funding}{#2}                    %
-}                                                           %  
+}                                                           %
 \newcommand{\studentnumber}[1]{\renewcommand{\nwpu@uid}{#1}}% 设置学号
 %%=============================================================================%
 %%=============================================================================%
@@ -630,7 +629,7 @@
             \vspace{7\baselineskip}                         % 7 * 10.5pt * 1.5
             \sSanhao \nwpu@chs@innerCoverFirstOption：\coverunderline[5.5cm]{\nwpu@chs@major} \\
             \sSanhao 作{\qquad}者：\coverunderline[5.5cm]{\nwpu@chs@author} \\
-            \sSanhao 指导教师：\coverunderline[5.5cm]{\nwpu@chs@advisor} \\
+            \sSanhao 指导教师：\coverunderline[5.5cm]{\nwpu@chs@advisor\nwpu@chs@advisorAcademicRank} \\
             \fSong \sWuhao \par                             %
             \vspace{2\baselineskip}                         % 2 * 10.5pt * 1.5
             \fSong \sSanhao \nwpu@chs@date                  %
@@ -844,15 +843,15 @@
         \sffamily\fHei\sSanhao{\appendixname~\thechapter}}{20pt}{\sSanhao}
     \renewcommand{\thechapter}{\Alph{chapter}}              %
     \renewcommand{\thesection}{\Alph{chapter}.\arabic{section}}
-    \renewcommand{\theequation}{\Alph{chapter}-\arabic{equation}}
-    \renewcommand{\thetable}{\Alph{chapter}-\arabic{table}} %
-    \renewcommand{\thefigure}{\Alph{chapter}-\arabic{figure}}
-    \renewcommand{\thetheorem}{\Alph{chapter}.\arabic{theorem}}
-    \renewcommand{\theaxiom}{\Alph{chapter}.\arabic{axiom}} %
-    \renewcommand{\thecorollary}{\Alph{chapter}.\arabic{corollary}}
-    \renewcommand{\thelemma}{\Alph{chapter}.\arabic{lemma}} %
-    \renewcommand{\thedefinition}{\Alph{chapter}.\arabic{definition}}
-    \renewcommand{\theexample}{\Alph{chapter}.\arabic{example}}
+    \renewcommand{\theequation}{\alph{chapter}-\arabic{equation}}
+    \renewcommand{\thetable}{\alph{chapter}-\arabic{table}} %
+    \renewcommand{\thefigure}{\alph{chapter}-\arabic{figure}}
+    \renewcommand{\thetheorem}{\alph{chapter}.\arabic{theorem}}
+    \renewcommand{\theaxiom}{\alph{chapter}.\arabic{axiom}} %
+    \renewcommand{\thecorollary}{\alph{chapter}.\arabic{corollary}}
+    \renewcommand{\thelemma}{\alph{chapter}.\arabic{lemma}} %
+    \renewcommand{\thedefinition}{\alph{chapter}.\arabic{definition}}
+    \renewcommand{\theexample}{\alph{chapter}.\arabic{example}}
 }                                                           %
 %%=============================================================================%
 %%=============================================================================%
@@ -885,7 +884,7 @@
         \begin{center}
             \renewcommand{\baselinestretch}{1.5}\fSong\sSihao\par
             {\bf 西北工业大学}\par
-            {\bf 学位论文使用授权声明}\par
+            {\bf 学位论文知识产权声明书}\par
         \end{center}
         \renewcommand{\baselinestretch}{2.22}\fSong\fontsize{10.6pt}{10.6pt}\selectfont
         {\qquad}本人完全了解学校有关保护知识产权的规定，即：研究生在校攻读学位期间论文工作的
@@ -920,8 +919,8 @@
             {\qquad}\mbox{秉承学校严谨的学风和优良的科学道德，本人郑重声明：所呈交的学位论文，是本}
             \mbox{人在导师的指导下进行研究工作所取得的成果。尽我所知，除文中已经注明引用的内容}
             \mbox{和致谢的地方外，本论文不包含任何其他个人或集体已经公开发表或撰写过的研究成果，}
-            \mbox{不包含本人或他人已申请学位或其他用途使用过的成果。对本文的研究做出重要贡献的}
-            \mbox{个人和集体，均已在文中以明确方式标明。}\par
+            \mbox{不包含本人或其他已申请学位或其他用途使用过的成果。对本文的研究做出重要贡献的}
+            \mbox{个人和集体，均已在文中以明确方式表明。}\par
             {\qquad}本人学位论文与资料若有不实，愿意承担一切相关的法律责任。\par
             \vspace*{1.5mm}
             \hspace*{21em}\hfill 学位论文作者签名{~:~}\underline{\qquad\qquad\quad}\par

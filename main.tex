@@ -1,0 +1,118 @@
+%%=============================================================================%
+%% 设置论文格式（学位、学位类型、盲评、Adobe 字体）
+%%-----------------------------------------------------------------------------%
+%% 博士、学术学位、正常版本、不使用 Adobe 字体
+%% \documentclass[lang=chs, degree=phd, blindreview=false, adobe=false, academic=true]{yanputhesis}
+%% 博士、专业学位、盲评版本、不使用 Adobe 字体
+%% \documentclass[lang=chs, degree=phd, blindreview=true, adobe=false, academic=false]{yanputhesis}
+%% 博士、学术学位、正常版本、强制使用 Windows 系统字体
+%% \documentclass[lang=chs, degree=phd, blindreview=false, winfonts=true, academic=true]{yanputhesis}
+%% 硕士、学术学位、正常版本、不使用 Adobe 字体
+\documentclass[lang=chs, degree=master, blindreview=false, adobe=false, academic=true]{yanputhesis}
+%% 硕士、专业学位、盲评版本、不使用 Adobe 字体
+%% \documentclass[lang=chs, degree=master, blindreview=true, adobe=false, academic=false]{yanputhesis}
+%%=============================================================================%
+%% 导言区：请自行添加额外宏包
+%%-----------------------------------------------------------------------------%
+\usepackage{blindtext}                                      % 生成无意义文本
+\usepackage{metalogo}                                       % 软件标志
+\usepackage[binary-units=true]{siunitx}                     % 物理量单位
+\usepackage{amsmath}                                        % 基础数学库
+\usepackage[acronym]{glossaries} % 缩略表库
+%%=============================================================================%
+%% 缩略语
+%%-----------------------------------------------------------------------------%
+\newacronym{npu}{西工大}{西北工业大学}
+\newglossaryentry{massEnergyFunc}{
+name = 质能方程,
+description = 一种阐述能量与质量间相互关系的理论物理学公式
+}
+\makeglossaries
+%%=============================================================================%
+%% 参考文献
+%%-----------------------------------------------------------------------------%
+\input{sec/n_reference.tex}
+%%=============================================================================%
+%% 基本信息录入
+%%-----------------------------------------------------------------------------%
+\title{基于 LaTeX 排版的 \\ 西北工业大学论文模板}{          % 中英文标题
+    Yet Another Thesis Template of \\ Northwestern Polytechnical University
+}                                                           % 请自行断行
+\author{\blindreview{张三丰}}{\blindreview{Sanfeng Zhang}}  % 姓名（添加盲评标记）
+\date{2022年6月}{Jun 2022}                                  % 答辩日期
+\school{数学与统计学院}{School of Mathematics and Statistics}% 学院
+\major{数学}{Philosophy in Mathematics}                     % 专业 博士请添加 Ph
+\advisor{\blindreview{李四海}}{\blindreview{Sihai Li}}      % 导师（添加盲评标记）
+\advisorAcademicRank{教授}{Professor}   % 导师中英学术职位（教授 Professor、副教授 Associate Professor、研究员 Researcher 和讲师 Lecturer）
+\studentnumber{2016123456}                                  % 学号
+\funding{本研究得到玄学基金（编号23336666）资助。}{         % 基金资助
+    The present work is supported by Funding of Metaphysics %
+    (Project No：23336666).}                                %
+%%=============================================================================%
+%% 文档开始
+%%-----------------------------------------------------------------------------%
+\begin{document}
+%%-----------------------------------------------------------------------------%
+%% 总前言，包含封皮页、中英文标题、中英文摘要、目录
+%%-----------------------------------------------------------------------------%
+\frontmatter                                                % 前言部分
+\maketitle                                                  % 封皮页及标题页
+%%-----------------------------------------------------------------------------%
+\makeCommitteePage{                                         % 学位论文评阅人
+    \reviewers{\fullBlindReview{5}}                         % 和答辩委员会名单
+    \committee{2023 年 x 月 y 日}{
+        \defenseChair{赵钱孙}{教授}{西北工业大学}
+        \committeeMember{周吴郑}{教授}{西北工业大学}
+        \committeeMember{冯陈褚}{教授}{西北工业大学}
+        \committeeMember{蒋沈韩}{教授}{西北工业大学}
+        \committeeMember{朱秦尤}{教授}{西北工业大学}
+        \committeeMember{何吕施}{教授}{西北工业大学}
+        \committeeMember{孔曹严}{教授}{西北工业大学}
+        \defenseSecretary{金魏陶}{教授}{西北工业大学}
+    }
+}
+%%-----------------------------------------------------------------------------%
+\input{sec/0_abstract.tex}
+%%-----------------------------------------------------------------------------%
+\tableofcontents                                            % 目录
+\listoffigures                                              % 图目录（学校未做要求）
+\listoftables                                               % 表目录（学校未做要求）
+\printnomenclature                                          % 符号表（学校未做要求）
+%%-----------------------------------------------------------------------------%
+
+%% 正文
+%%-----------------------------------------------------------------------------%
+\mainmatter
+\sDefault
+
+\input{sec/1_introduction.tex}
+\input{sec/2_theory.tex}
+\input{sec/3_method_01.tex}
+\input{sec/4_method_02.tex}
+%%-----------------------------------------------------------------------------%
+
+%% 参考文献以及附录
+%%-----------------------------------------------------------------------------%
+%% \bibliographystyle{nputhesis}                               % GB/T 7714-2015 格式
+\bibliographystyle{nputhesis-noslash}                       % 参考文献改进格式
+\bibliography{reference}                                    % 参考文献
+\appendix
+
+\input{sec/n_appendix_01.tex}
+\input{sec/n_appendix_02.tex}
+
+%%=============================================================================%
+%% 文档附页部分（致谢、参加科研情况、知识产权与原创性声明）
+%%-----------------------------------------------------------------------------%
+\backmatter                                                 % 文档附页部分
+%%-----------------------------------------------------------------------------%
+\input{sec/n_acknowledgements.tex}
+%%-----------------------------------------------------------------------------%
+\input{sec/n_accomplishments.tex}
+%%-----------------------------------------------------------------------------%
+\makestatement                                              % 知识产权与原创性声明
+%%=============================================================================%
+%% 文档结束
+%%-----------------------------------------------------------------------------%
+\end{document}
+%%=============================================================================%
